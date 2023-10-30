@@ -11,3 +11,9 @@ ClassChat is an education based web application designed around allowing student
 # Project Roles
 
 # Github Project
+
+# References
+
+Ray, K., Downs, D., Vey, H., Azmy, K., & Squires, A. (2014). Problem description (overview) -
+wordpress.com. maxliboiron. Retrieved March 8, 2023, from
+https://maxliboiron.files.wordpress.com/2014/12/anonimity-and-classroomparticipation.pdf
