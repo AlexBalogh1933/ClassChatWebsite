@@ -1,0 +1,105 @@
+/* Nav menu CSS */
+nav a{
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.4em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: .05em;
+    padding-bottom: .05em;
+    border: solid 1px #9BCDD2;
+    /* border-radius: 30px; */
+    display: inline-block;
+}
+nav a:link {
+    background-color: #9BCDD2;
+    color: black;
+}
+nav a:hover {
+    background-color: #FF8551;
+    color: black;
+}
+#links {
+    display: inline-block;
+}
+
+/* Dropdown CSS */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+}
+nav ul li {
+    display: block;
+    padding: 8px 16px;
+}
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+li.account {
+    display: block;
+    padding: 8px 16px;
+    position: absolute;
+    left: 80%;
+}
+li.account a{
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.4em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: .05em;
+    padding-bottom: .05em;
+    border: solid 1px #9BCDD2;
+    display: inline-block;
+}
+li.account a:link, a:visited{
+    background-color: #9BCDD2;
+    color: black;
+}
+li.account a:hover {
+    background-color: #FF8551;
+    color: black;
+}
+
+/* Background */
+body {
+    background-image: linear-gradient(to right, black , red);
+}
+
+/* Text CSS */
+h1 {
+    font-size: 2em;
+    font-family: "Times New Roman", serif;
+    text-align: center;
+    color: #FAF0E4;
+}
+p.normText {
+    font-family: "Times New Roman", serif;
+    font-size: 1.25em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: #FAF0E4;
+}
+table {
+    border: 1px solid;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Times New Roman", serif;
+    font-size: 1.25em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: #FAF0E4;
+}
+td {
+    border: 1px solid #FAF0E4;
+    margin: 10px;
+}
+
+/* Photo CSS */
