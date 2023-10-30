@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "d:\\VS Code Projects\\ClassChat Website\\html\\index.html"
+            "file": ".\\html\\index.html"
         }
     ]
 }
