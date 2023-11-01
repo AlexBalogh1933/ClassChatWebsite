@@ -8,7 +8,7 @@
     </head>
     <body>
         <header>
-            <li class="account"><a href="html/account.html">Account</a></li>
+            <li class="account"><a href="account.html">Account</a></li>
         </header>
         <h1>ClassChat</h1>
         <main id="home">
@@ -21,32 +21,80 @@
                 Welcome to Account Details
             </p>
             <p class="accountDetails">
-                <table class="detailsList">
+                <form>
+                    <table class="detailsList">
                     <tr>
                         <td>Username</td>
-                        <td>baloghaj</td>
+                        <td>
+                            <input type="text" id="username" name="username"><br>
+                        </td>
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td>**********</td>
+                        <td>
+                            <input type="password" id="passwordID" name="password"><br>
+                            <input type="checkbox" id="showPasswordCB" onclick="showPassword()">Show Password
+                        </td>
                     </tr>
                     <tr>
                         <td>University</td>
-                        <td>University of Cincinnati</td>
+                        <td>
+                            <input type="text" id="university" name="university" placeholder="University of ..."><br>
+                        </td>
                     </tr>
                     <tr>
                         <td>University Email</td>
-                        <td>baloghaj@mail.uc.edu</td>
+                        <td>
+                            <input type="email" id="email" name="email"><br>
+                        </td>
                     </tr>
                     <tr>
                         <td>University Year</td>
-                        <td>5th Year Senior</td>
+                        <td>
+                            <input type="text" id="class" name="class"><br>
+                        </td>
                     </tr>
                     <tr>
                         <td>University Major</td>
-                        <td>Information Technology</td>
+                        <td><input type="text" id="class" name="class"><br></td>
                     </tr>
                 </table>
+                <input type="submit" value="Submit" onclick="validateEmail()">
+                <input type="reset" value="Reset">
+                </form>
             </p>
         </main>
     </body>
+
+    <script>
+        function showPassword() 
+        {
+            var x = document.getElementById("passwordID");
+            if (x.type === "password")
+            {
+                x.type = "text";
+            }
+            else 
+            {
+                x.type = "password";
+            }
+        }
+        function validateEmail() 
+        {
+            event.preventDefault();
+
+            var emailInput = document.getElementById('email');
+            var email = emailInput.value.trim();
+
+            // Regular expression to check if the email ends with .edu
+            var eduPattern = /.edu$/;
+
+            if (eduPattern.test(email)) 
+            {
+            } 
+            else 
+            {
+                alert('Invalid email address. Please enter a valid .edu email.');
+            }
+        }
+    </script>
