@@ -4,14 +4,20 @@
         <title>ClassChat - Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" id="main" href="main.css" type="text/css"/>
+        <link rel="stylesheet" id="main" href="resources/css/main.css" type="text/css"/>
+        <!--Parse SDK-->
+        <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+        <script type="text/javascript" type="text/javascript">
+            Parse.initialize("tZR7OFbSpbGNiSRwbJ7hWaojIoLDTBtDR0V8gurQ","rJF80e5Wau8U9OTsmxV7RkMeO5ccn6zmr3WcHwUO"); //APP ID & JS KEY from Colton's account.
+            Parse.serverURL = 'https://parseapi.back4app.com/'
+        </script>
     </head>
-    <body>
+    <body onload="retrieveMessage()">
         <header>
             <li class="account"><a href="html/account.html">Account</a></li>
         </header>
         <h1>ClassChat</h1>
-        <main id="home">
+        <main class="home">
             <!-- Navagation Section -->
             <nav>
                 <ul>
@@ -22,7 +28,7 @@
 
             <!-- Random Message -->
             <p class="normText">
-                Welcome to ClassChat. This is a chatting system for College students
+                Welcome to ClassChat. This is a chatting system for College students.
             </p>
             
             <!-- Chat Side Selection Tab -->
@@ -32,14 +38,16 @@
 
             <!-- Currently Opened Chat Section -->
             <div class="currentChat">
-                <canvas id="chatDisplay">
+                <textarea id="chatDisplay" class="chatDisplay">
 
-                </canvas>
-                <div id="chatbar">
+                </textarea>
+                <div class="chatbar">
                     <input class="typeMessage" type="text" placeholder="Type a message ...">
-                    <button class="sendMessage" type="button">Send</button>
+                    <button id="sendButton" class="sendMessage" type="button">Send</button>
                 </div>
             </div>
             
         </main>
+        <script src="resources/js/index.js"></script>
     </body>
+</html>
