@@ -1,3 +1,11 @@
+const sendButton = document.getElementById("sendButton");
+const chatDisplay = document.getElementById("chatDisplay")
+
+sendButton.addEventListener("click", function(sendButtonClickEvent){
+  sendButtonClickEvent.preventDefault();
+  saveNewMessageAnon();
+});
+
 //TODO: add user input parameter for message contents
 async function saveNewMessageAnon(){
   const message = new Parse.Object("Message");
@@ -12,15 +20,17 @@ async function saveNewMessageAnon(){
   }
 }
 
+//TODO: retrieve all messages from DB class & into text area
 async function retrieveMessage(){
   const query = new Parse.Query("Message");
 
   try{
-    const message = await query.get("Crap");
+    const message = await query.get("p2iO6jVG7n");
     const sender = message.get("sender");
     const contents = message.get("contents");
 
-    alert(`${sender}: ${contents}`)
+    chatDisplay.append(sender + ": " + contents);
+    //alert(`${sender}: ${contents}`);
   } catch(error){
     alert(`Failed to retrieve the object, with error code: ${error.message}`);
   }
