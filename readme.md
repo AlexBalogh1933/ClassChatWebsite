@@ -6,11 +6,106 @@ ClassChat is an education based web application designed around allowing student
 
 # Functional Requirements
 
+1. As a student, I want to be able to anonymously send messages.
+
+   **Example 1**
+   
+   Given: The user is in a group.
+   
+   Given: A feed of group data is available.
+   
+   Given: The user is able to send messages.
+   
+   When: The user clicks "Send Silently" in a group.
+   
+   Then: The user's message will be posted in the group without their name attached to it.
+
+
+   **Example 2**
+   
+   Given: A feed of users is available.
+   
+   When: The user clicks "Send Silently" in a private DM.
+   
+   Then: The user's message will be posted in a private, 1:1, message without their name attached to it.
+   
+
+2. As a student, I want to be able to manage the groups I am in.
+   
+   **Example 1**
+   
+   Given: A feed of group data is available.
+   
+   When: The user clicks "Join Group" on a group.
+   
+   Then: The user will be added to the group's list of members.
+   
+   Then: The group will be added to the user's list of groups.
+   
+
+   **Example 2**
+   
+   Given: A feed of group data is available.
+   
+   When: The user clicks "Create Group" on the "Groups" menu.
+   
+   Then: The a group will be created with the specified information.
+   
+   Then: The user will be added to the group as the owner.
+   
+
+3. As a student, I want to be able to use a school account.
+   
+   **Example 1**
+   
+   Given: A feed of account data is available.
+   
+   When: The user clicks "Create Account"
+   
+   When: The user provides an email ending in ".edu".
+   
+   Then: An account will be generated with the provided information.
+   
+
+   **Example 2**
+   
+   Given: A feed of account data is available.
+   
+   When: the user clicks "Create Account"
+   
+   When: The user provides an email that does not end in ".edu"
+   
+   Then: The user will be prompted to use an email that ends in ".edu"
+   
+
+   **Example 3**
+   
+   Given: A feed of account data is available.
+   
+   Given: The user has previously created an account.
+   
+   When: The user enters their email and password.
+   
+   When: The user clicks "Sign In".
+   
+   Then: The user will be signed into their account.
+
+
 # Class Diagram
 
 # Project Roles
 
+Project Manager/Security Analyst: Chase Lambrinides
+
+Software Architect: Colton Dalton
+
+Software Developer/Designer: Alex Balogh
+
+
 # Github Project
+
+[https://github.com/users/AlexBalogh1933/projects/1/views/1](https://github.com/users/AlexBalogh1933/projects/1/views/1)
+
 
 # References
 
