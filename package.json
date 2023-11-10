@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@2toad/profanity": "^2.2.0",
     "parse": "^4.2.0"
   }
 }

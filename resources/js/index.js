@@ -1,14 +1,15 @@
-const sendButton = document.getElementById("sendButton");
+const sendButtonAnon = document.getElementById("sendButtonAnon");
 const chatDisplay = document.getElementById("chatDisplay");
 const typeMessage = document.getElementById("typeMessage");
 
-sendButton.addEventListener("click", function(sendButtonClickEvent){
-  sendButtonClickEvent.preventDefault();
+//Send as A Classmate
+sendButtonAnon.addEventListener("click", function(sendButtonAnonClickEvent){
+  sendButtonAnonClickEvent.preventDefault();
   saveNewMessageAnon(typeMessage.value);
   typeMessage.value = "";
 });
 
-//TODO: add user input parameter for message contents
+//Sends a message anonymously as "A Classmate"
 async function saveNewMessageAnon(Message){
   const message = new Parse.Object("Message");
 
@@ -36,4 +37,8 @@ async function retrieveMessage(){
   } catch(error){
     alert(`Failed to retrieve the object, with error code: ${error.message}`);
   }
+}
+
+async function checkProfanity(Message){
+  
 }
