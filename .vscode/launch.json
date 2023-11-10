@@ -9,6 +9,12 @@
             "request": "launch",
             "name": "Open index.html",
             "file": ".\\index.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open index.html",
+            "file": ".\\index.html"
         }
     ]
 }
