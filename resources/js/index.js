@@ -1,22 +1,24 @@
 const sendButton = document.getElementById("sendButton");
-const chatDisplay = document.getElementById("chatDisplay")
+const chatDisplay = document.getElementById("chatDisplay");
+const typeMessage = document.getElementById("typeMessage");
 
 sendButton.addEventListener("click", function(sendButtonClickEvent){
   sendButtonClickEvent.preventDefault();
-  saveNewMessageAnon();
+  saveNewMessageAnon(typeMessage.value);
+  typeMessage.value = "";
 });
 
 //TODO: add user input parameter for message contents
-async function saveNewMessageAnon(){
+async function saveNewMessageAnon(Message){
   const message = new Parse.Object("Message");
 
-  message.set("sender", "Nobody");
-  message.set("contents", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+  message.set("sender", "A Classmate");
+  message.set("contents", Message);
   try{
     let result = await message.save()
-    alert('New object created with ObjectId: ' + result.id);
+    //alert('New object created with ObjectId: ' + result.id);
   } catch(error){
-    alert('Failed to create new object, with error code: ' + error.message);
+    alert('Failed to send message, with error code: ' + error.message);
   }
 }
 
