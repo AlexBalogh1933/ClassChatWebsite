@@ -16,15 +16,15 @@
         <header>
             <li class="account"><a href="html/account.html">Account</a></li>
         </header>
-        <h1>ClassChat</h1>
         <main class="home">
-            <!-- Navagation Section -->
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="html/aboutMe.html">About Me</a></li>
-                </ul>
-            </nav>
+            <h1>ClassChat</h1>
+
+            <div class="accountInformation">
+                <p class="accInfo">
+                    Alex Balogh <br>
+                    Information Technology <br>
+                    Senior (5th Year)</p>
+            </div>
 
             <!-- Random Message -->
             <p class="normText">
@@ -37,13 +37,16 @@
             </div>
 
             <!-- Currently Opened Chat Section -->
-            <div class="currentChat">
-                <textarea id="chatDisplay" class="chatDisplay">
+            <div class="chat">
+                <!--<p class="currentChatName">General</p>-->
+                <div class="currentChat">
+                    <textarea id="chatDisplay" class="chatDisplay" readonly>
 
-                </textarea>
-                <div class="chatbar">
-                    <input class="typeMessage" type="text" placeholder="Type a message ...">
-                    <button id="sendButton" class="sendMessage" type="button">Send</button>
+                    </textarea>
+                    <div class="chatbar">
+                        <input class="typeMessage" type="text" placeholder="Type a message ...">
+                        <button id="sendButton" class="sendMessage" type="button">Send</button>
+                    </div>
                 </div>
             </div>
             
