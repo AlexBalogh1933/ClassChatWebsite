@@ -11,8 +11,12 @@
             Parse.initialize("tZR7OFbSpbGNiSRwbJ7hWaojIoLDTBtDR0V8gurQ","rJF80e5Wau8U9OTsmxV7RkMeO5ccn6zmr3WcHwUO"); //APP ID & JS KEY from Colton's account.
             Parse.serverURL = 'https://parseapi.back4app.com/'
         </script>
+        <script src="resources/vendor/jquery-3.5.1.slim.min.js"></script>
+        <script src="resources/vendor/popper.min.js"></script>
+        <script src="resources/vendor/bootstrap.min.js"></script>
+        
     </head>
-    <body onload="retrieveMessage()">
+    <body>
         <header>
             <li class="account"><a href="html/account.html">Account</a></li>
         </header>
@@ -40,16 +44,13 @@
             <div class="chat">
                 <!--<p class="currentChatName">General</p>-->
                 <div class="currentChat">
-                    <textarea id="chatDisplay" class="chatDisplay" readonly>
-
-                    </textarea>
-                    <div class="chatbar">
-                        <input class="typeMessage" type="text" placeholder="Type a message ...">
-                        <button id="sendButton" class="sendMessage" type="button">Send</button>
-                    </div>
+                  <textarea id="chatDisplay" class="chatDisplay" readonly>
+                  </textarea>
+                  <div class="chatbar">
+                    <input id ="typeMessage" class="typeMessage" type="text" placeholder="Type a message ...">
+                    <button id="sendButtonAnon" class="sendMessage" type="button">Send as: A Classmate</button>
                 </div>
             </div>
-            
         </main>
         <script src="resources/js/index.js"></script>
     </body>

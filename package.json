@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "parse": "^4.2.0"
   }
