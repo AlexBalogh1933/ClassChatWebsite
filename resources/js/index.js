@@ -5,7 +5,6 @@ const typeMessage = document.getElementById("typeMessage");
 //Updates the list of messages
 async function updateMessages(){
   try{
-    //schatDisplay.value = "";
 
     const messages = new Parse.Query("Message");
     messages.ascending("createdAt");
