@@ -4,6 +4,7 @@ const typeMessage = document.getElementById("typeMessage");
 const usernameField = document.getElementById("usernameInput");
 const passwordField = document.getElementById("passwordInput");
 const signInButton = document.getElementById("signInButton");
+let isSignedIn = false;
 
 //Updates the list of messages
 async function updateMessages(){
@@ -27,10 +28,6 @@ async function updateMessages(){
   }
 }
 
-//Set the interval at which the updateMessages() function is run.
-const MILLISECONDS_IN_ONE_SECOND = 1000;
-setInterval(updateMessages, MILLISECONDS_IN_ONE_SECOND);
-
 //Send as A Classmate
 sendButtonAnon.addEventListener("click", function(sendButtonAnonClickEvent){
   sendButtonAnonClickEvent.preventDefault();
@@ -51,3 +48,18 @@ async function saveNewMessageAnon(Message){
       alert('Failed to send message, with error code: ' + error.message);
     }
 }
+
+async function checkForSignedIn(){
+  //if the user is NOT signed in
+  if (!isSignedIn){
+    //TODO: index.html displays the sign in option
+  }
+  //if the user is signed in
+  else{
+    //TODO: index.html displays the information of the current signed in user
+  }
+}
+
+//Set the interval at which the updateMessages() function is run.
+const MILLISECONDS_IN_ONE_SECOND = 1000;
+setInterval(updateMessages, MILLISECONDS_IN_ONE_SECOND);
