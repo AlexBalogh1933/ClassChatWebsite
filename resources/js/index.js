@@ -1,11 +1,13 @@
 const sendButtonAnon = document.getElementById("sendButtonAnon");
 const chatDisplay = document.getElementById("chatDisplay");
 const typeMessage = document.getElementById("typeMessage");
+const usernameField = document.getElementById("usernameInput");
+const passwordField = document.getElementById("passwordInput");
+const signInButton = document.getElementById("signInButton");
 
 //Updates the list of messages
 async function updateMessages(){
   try{
-
     const messages = new Parse.Query("Message");
     messages.ascending("createdAt");
     const results = await messages.find();
