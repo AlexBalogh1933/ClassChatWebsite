@@ -38,15 +38,15 @@
             </div>
 
             <!-- Currently Opened Chat Section -->
-            <div class="chat">
-                <!--<p class="currentChatName">General</p>-->
-                <div class="currentChat">
-                  <textarea id="chatDisplay" class="chatDisplay" readonly>
-                  </textarea>
-                  <div class="chatbar">
+            <div class="currentChat">
+                <p class="currentChatName">General</p>
+                <textarea id="chatDisplay" class="chatDisplay" readonly>
+                </textarea>
+                <div class="chatbar">
                     <input id ="typeMessage" class="typeMessage" type="text" placeholder="Type a message ...">
-                    <button id="sendButtonAnon" class="sendMessage" type="button">Send as: A Classmate</button>
-                </div>
+                    <button id="sendButtonAnon" class="sendMessageAnonBTN" type="button">Send as: A Classmate</button>
+                    <button id="sendButtonAsUser" class="sendMessageUserBTN" type="button">Send as: You</button>
+                 </div>
             </div>
         </main>
         <script src="resources/js/index.js"></script>

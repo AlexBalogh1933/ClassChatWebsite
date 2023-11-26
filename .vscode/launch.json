@@ -7,13 +7,13 @@
         {
             "type": "msedge",
             "request": "launch",
-            "name": "Open index.html",
+            "name": "Open Edge",
             "file": ".\\index.html"
         },
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open index.html",
+            "name": "Open Chrome",
             "file": ".\\index.html"
         }
     ]
