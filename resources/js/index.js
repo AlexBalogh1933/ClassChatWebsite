@@ -43,7 +43,7 @@ async function checkForSignedIn(){
     `
       <input id ="typeMessage" class="typeMessage" type="text" placeholder="Type a message ...">
       <button id="sendButtonAnon" class="sendMessageAnonBTN" type="button">Send as: A Classmate</button>
-      <button id="sendButtonAsUser" class="sendMessageUserBTN" type="button">Send as: You</button>
+      <button id="sendButtonAsUser" class="sendMessageUserBTN" type="button">Send as: ${currentUser.get('username')}</button>
     `;
     getAllElements();
 
