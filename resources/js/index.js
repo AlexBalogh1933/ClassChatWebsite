@@ -2,6 +2,13 @@ let sendButtonAnon;
 let sendButtonUser;
 let chatDisplay;
 let typeMessage;
+let accountInformation;
+let usernameField;
+let passwordField;
+let signInButton;
+let signUpButton;
+let logOutButton;
+let chatbar;
 
 window.localStorage.clear();
 
