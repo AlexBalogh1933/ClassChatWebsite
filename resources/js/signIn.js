@@ -1,9 +1,9 @@
-var accountInformation;
-var usernameField;
-var passwordField;
-var signInButton;
-var signUpButton;
-var logOutButton;
+let accountInformation;
+let usernameField;
+let passwordField;
+let signInButton;
+let signUpButton;
+let logOutButton;
 
 getAllElements();
 checkForSignedIn();
@@ -19,7 +19,7 @@ async function getAllElements(){
 
 async function checkForSignedIn(){
   //Get the current user data
-  var currentUser = await Parse.User.currentAsync();
+  let currentUser = await Parse.User.currentAsync();
   //if a user is signed in
   if(currentUser != null){
     accountInformation.innerHTML = 

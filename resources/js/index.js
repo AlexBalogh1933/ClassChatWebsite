@@ -1,4 +1,5 @@
 const sendButtonAnon = document.getElementById("sendButtonAnon");
+const sendButtonUser = document.getElementById("sendButtonAsUser");
 const chatDisplay = document.getElementById("chatDisplay");
 const typeMessage = document.getElementById("typeMessage");
 
@@ -24,7 +25,7 @@ async function updateMessages(){
   }
 }
 
-//Send as A Classmate
+//Send as A Classmate (ANONYMOUS)
 sendButtonAnon.addEventListener("click", function(sendButtonAnonClickEvent){
   sendButtonAnonClickEvent.preventDefault();
   saveNewMessageAnon(typeMessage.value);
@@ -45,9 +46,31 @@ async function saveNewMessageAnon(Message){
     }
 }
 
+//Send as a User (USERNAME)
+sendButtonUser.addEventListener("click", function(sendButtonUserClickEvent){
+  sendButtonUserClickEvent.preventDefault();
+  saveNewMessageUser(typeMessage.value);
+  updateMessages();
+  typeMessage.value = "";
+})
+
+//Sends a message NON anonymously as username
+async function saveNewMessageUser(Message){
+  try{
+    const message = new Parse.Object("Message");
+    let currentUser = await Parse.User.currentAsync();
+    let currentUsername = currentUser.get('username');
+    message.set("sender", currentUsername);
+    message.set("contents", Message);
+    let result = await message.save(); 
+  }
+  catch(error){
+    alert('Failed to send message, with error code: ' + error.message);
+  }
+}
+
 //Set the interval at which the updateMessages() function is run.
 const MILLISECONDS_IN_ONE_SECOND = 1000;
 setInterval(updateMessages, MILLISECONDS_IN_ONE_SECOND);
 
-//
 window.localStorage.clear()
