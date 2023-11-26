@@ -35,8 +35,8 @@ async function checkForSignedIn(){
   if(currentUser != null){
     accountInformation.innerHTML = 
     `
-    <p>Welcome, ${currentUser.get('username')}</p>
-    <button id="logOutButton" type="button">Log Out</button>
+    <p class="signInWelcome">Welcome, ${currentUser.get('username')}</p>
+    <button id="logOutButton" class="logOutBTN" type="button">Log Out</button>
     `;
 
     chatbar.innerHTML = 
@@ -74,10 +74,10 @@ async function checkForSignedIn(){
   else{
     accountInformation.innerHTML = 
     `
-      <input id="usernameInput" type="text" placeholder="Username"></input>
-      <input id="passwordInput" type="text" placeholder="Password"></input>
-      <button id="signInButton" type="button">Sign In</button>
-      <button id="signUpButton" type="button">Sign Up</button>
+      <input id="usernameInput" class="usernameInput" type="text" placeholder="Username"></input>
+      <input id="passwordInput" class="passwordInput"type="password" placeholder="Password"></input>
+      <button id="signInButton" class="signInButton" type="button">Sign In</button>
+      <button id="signUpButton" class="signUpButton" type="button">Sign Up</button>
     `;
 
     chatbar.innerHTML = 

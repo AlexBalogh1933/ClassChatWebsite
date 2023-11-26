@@ -87,7 +87,8 @@ p.normText {
     padding-right: 1em;
     color: #FAF0E4;
     position: absolute;
-    top: 15%;
+    top: 15.5%;
+    left: 1%;
 }
 table {
     border: 1px solid;
@@ -244,7 +245,7 @@ textarea.chatDisplay {
 .accountInformation {
     border: 3px solid white;
     width: 16%;
-    height: 10%;
+    height: 12%;
     position: absolute;
     top: 2%;
     left: 2%;
@@ -258,3 +259,70 @@ p.accInfo {
     padding-bottom: .05px;
     color: #FAF0E4;
 }
+.signInWelcome {
+    font-family: "Times New Roman", serif;
+    font-size: 1.5em;
+    padding-top: .05px;
+    padding-bottom: .05px;
+    color: #FAF0E4;
+}
+input.usernameInput {
+    width: 94%;
+    font-size: 1.1em;
+    padding: 8px 10px;
+    position: absolute;
+    top: 2%;
+}
+input.passwordInput {
+    width: 94%;
+    font-size: 1.1em;
+    padding: 8px 10px;
+    position: absolute;
+    bottom: 28%;
+}
+button.signInButton {
+    width: 20%;
+    background-color: #FF4E50;
+    color: black;
+    padding: 4px 6px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    position: absolute;
+    left: 3%;
+    bottom: 6%;
+}
+button.signUpButton {
+    width: 20%;
+    background-color: #FF4E50;
+    color: black;
+    padding: 4px 6px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    position: absolute;
+    left: 25%;
+    bottom: 6%;
+}
+button.logOutBTN {
+    width: 30%;
+    background-color: #FF4E50;
+    color: black;
+    padding: 4px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    position: absolute;
+    left: 3%;
+    bottom: 6%;
+}
+
