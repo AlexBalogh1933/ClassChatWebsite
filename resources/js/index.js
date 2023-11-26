@@ -5,7 +5,6 @@ const typeMessage = document.getElementById("typeMessage");
 //Updates the list of messages
 async function updateMessages(){
   try{
-
     const messages = new Parse.Query("Message");
     messages.ascending("createdAt");
     const results = await messages.find();
@@ -24,10 +23,6 @@ async function updateMessages(){
     alert(`Failed to retrieve messages, with error code: ${error.message}`);
   }
 }
-
-//Set the interval at which the updateMessages() function is run.
-const MILLISECONDS_IN_ONE_SECOND = 1000;
-setInterval(updateMessages, MILLISECONDS_IN_ONE_SECOND);
 
 //Send as A Classmate
 sendButtonAnon.addEventListener("click", function(sendButtonAnonClickEvent){
@@ -49,3 +44,10 @@ async function saveNewMessageAnon(Message){
       alert('Failed to send message, with error code: ' + error.message);
     }
 }
+
+//Set the interval at which the updateMessages() function is run.
+const MILLISECONDS_IN_ONE_SECOND = 1000;
+setInterval(updateMessages, MILLISECONDS_IN_ONE_SECOND);
+
+//
+window.localStorage.clear()
