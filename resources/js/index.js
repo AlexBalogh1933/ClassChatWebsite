@@ -165,7 +165,7 @@ async function signUp(){
   }
 }
 
-//TODO: Testing
+//Logs out the current user
 async function logOut(){
   try{
     Parse.User.logOut();
@@ -178,8 +178,6 @@ async function logOut(){
 }
 
 //Send as A Classmate (ANONYMOUS)
-
-
 //Sends a message anonymously as "A Classmate"
 async function saveNewMessageAnon(Message){
     try{
