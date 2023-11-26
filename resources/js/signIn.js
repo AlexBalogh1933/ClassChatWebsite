@@ -19,12 +19,13 @@ async function getAllElements(){
 
 async function checkForSignedIn(){
   //Get the current user data
-  const currentUser = await Parse.User.currentAsync();
+  var currentUser = await Parse.User.currentAsync();
   //if a user is signed in
   if(currentUser != null){
     accountInformation.innerHTML = 
     `
-    <p>Welcome, ${currentUser.get('username')}</p><button id="logOutButton" type="button">Log Out</button>
+    <p>Welcome, ${currentUser.get('username')}</p>
+    <button id="logOutButton" type="button">Log Out</button>
     `;
     getAllElements();
 
@@ -98,7 +99,7 @@ async function signUp(){
 
 async function logOut(){
   try{
-    Parse.User.logOut();
+    currentUser.logOut();
     checkForSignedIn();
   }
   catch(error){
