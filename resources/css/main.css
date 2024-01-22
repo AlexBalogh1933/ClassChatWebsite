@@ -239,6 +239,50 @@ textarea.chatDisplay {
     position: absolute;
     bottom: 3%;
     left: 2%;
+    text-align: center;
+}
+button.sidebarButtons {
+    width: 20%;
+    background-color: #FF4E50;
+    color: black;
+    padding: 4px 6px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+}
+/* The groups/favorites popup*/
+.sidebarModal {
+    
+    color: #000000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #FFF;
+    transition: all 0.4s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.sidebarModal:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-box-close {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    color: #fe0606;
+    text-decoration: none;
+    font-size: 30px;
 }
 
 /* Acount Information */
