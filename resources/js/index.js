@@ -9,6 +9,10 @@ let signInButton;
 let signUpButton;
 let logOutButton;
 let chatbar;
+let favoritesPopup;
+let groupsPopup;
+let createGroupButton;
+let groupsList;
 
 window.localStorage.clear();
 
@@ -32,6 +36,10 @@ async function getAllElements(){
   signUpButton = document.getElementById("signUpButton");//Button to sign up, see TODO
   logOutButton = document.getElementById("logOutButton");//Button to log out current user
   chatbar = document.getElementById("chatbar");//Div containing both send message buttons and typeMessage
+  favoritesPopup = document.getElementById("favoritesPopup");
+  groupsPopup = document.getElementById("groupsPopup");
+  createGroupButton = document.getElementById("createGroupButton");//Button to create a group
+  groupsList = document.getElementById("groupsList");//List of user's groups
 }
 
 //Checks to see if the user is signed in. HTML is changed based on true/false.
@@ -52,6 +60,21 @@ async function checkForSignedIn(){
       <button id="sendButtonAnon" class="sendMessageAnonBTN" type="button">Send as: A Classmate</button>
       <button id="sendButtonAsUser" class="sendMessageUserBTN" type="button">Send as: ${currentUser.get('username')}</button>
     `;
+
+    groupsPopup.innerHTML = 
+    `
+      <h1>Your Groups</h1>
+      <button id="createGroupButton">Create Group</button>
+      <button>Join Group</button>
+      <p>Select a group to view the chat.</p>
+      <P>
+        <ul id="groupsList">
+          
+        </ul>
+      <p>
+    `
+
+    getGroups();
     getAllElements();
 
     //Adds logout button logic
@@ -76,6 +99,15 @@ async function checkForSignedIn(){
       updateMessages();
       typeMessage.value = "";
     });
+
+    //Adds create group logic
+    createGroupButton.addEventListener("click", function(createGroupButtonClickEvent){
+      createGroupButtonClickEvent.preventDefault();
+      createGroup();
+      getGroups();
+    })
+
+
   }   
   //if a user is not signed in
   else{
@@ -92,6 +124,21 @@ async function checkForSignedIn(){
       <input id ="typeMessage" class="typeMessage" type="text" placeholder="Type a message ...">
       <button id="sendButtonAnon" class="sendMessageAnonBTN" type="button">Send as: A Classmate</button>
     `;
+
+    favoritesPopup.innerHTML =
+    `
+      <p>Your Favorites</p>
+      <p>Please sign in to view your favorites.</p>
+      <a href="#" class="popup-box-close">X</a>
+    `;
+
+    groupsPopup.innerHTML = 
+    `
+      <p>Your Groups</p>
+      <p>Please sign in to view your groups.</p>
+      <a href="#" class="popup-box-close">X</a>
+    `;
+
     getAllElements();
 
     //Adds signUpButtonLogic
@@ -210,6 +257,54 @@ async function saveNewMessageUser(Message){
   }
   catch(error){
     alert('Failed to send message, with error code: ' + error.message);
+  }
+} 
+
+async function createGroup(){
+  let name = prompt("Enter the name of your group:")
+  try{
+    const group = new Parse.Object("Group");
+    let currentUser = await Parse.User.currentAsync();
+    let members = [currentUser.get("username")];
+    group.set("name", name);
+    group.set("members", members);
+    let result = await group.save();
+  }
+  catch(error){
+    alert('Failed to create group, with error code: ' + error.message);
+  }
+      
+}
+
+async function getGroups(){
+  try{
+    groupsPopup.innerHTML = 
+    `
+      <h1>Your Groups</h1>
+      <button id="createGroupButton">Create Group</button>
+      <button>Join Group</button>
+      <p>Select a group to view the chat.</p>
+      <P>
+        <ul id="groupsList">
+          
+        </ul>
+      <p>
+    `
+    
+    getAllElements();
+    const groups = new Parse.Query("Group");
+    groups.ascending("name");
+    const results = await groups.find();
+
+    for (let i = 0; i < results.length; i++){
+      const group = results[i];
+      let li = document.createElement("li");
+      li.innerText = group.get("name");
+      groupsList.appendChild(li);
+    }
+  }
+  catch(error){
+    alert(`Failed to get groups with error code: ${error.message}`)
   }
 }
 
