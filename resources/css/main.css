@@ -258,7 +258,7 @@ button.sidebarButtons {
     display: inline-block;
 }
 /* The groups/favorites popup*/
-.sidebarModal {
+.popupModal {
     
     color: #000000;
     top: 0;
@@ -267,12 +267,14 @@ button.sidebarButtons {
     right: 0;
     background: #FFF;
     transition: all 0.4s;
-    visibility: hidden;
+    /*visibility: hidden;*/
+    display: none;
     opacity: 0;
 }
 
-.sidebarModal:target {
-    visibility: visible;
+.popupModal:target {
+    /*visibility: visible;*/
+    display: block;
     opacity: 1;
 }
 
