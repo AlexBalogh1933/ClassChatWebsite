@@ -64,8 +64,8 @@ async function checkForSignedIn(){
     groupsPopup.innerHTML = 
     `
       <h1>Your Groups</h1>
-      <button id="createGroupButton">Create Group</button>
-      <button>Join Group</button>
+      <button id="createGroupButton" type="button">Create Group</button>
+      <button type="button">Join Group</button>
       <p>Select a group to view the chat.</p>
       <P>
         <ul id="groupsList">
@@ -127,14 +127,14 @@ async function checkForSignedIn(){
 
     favoritesPopup.innerHTML =
     `
-      <p>Your Favorites</p>
+      <h1>Your Favorites</h1>
       <p>Please sign in to view your favorites.</p>
       <a href="#" class="popup-box-close">X</a>
     `;
 
     groupsPopup.innerHTML = 
     `
-      <p>Your Groups</p>
+      <h1>Your Groups</h1>
       <p>Please sign in to view your groups.</p>
       <a href="#" class="popup-box-close">X</a>
     `;
