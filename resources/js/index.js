@@ -13,6 +13,7 @@ let favoritesPopup;
 let groupsPopup;
 let createGroupButton;
 let groupsList;
+let groupsListDiv;
 
 window.localStorage.clear();
 
@@ -42,6 +43,7 @@ async function getAllElements(){
   groupsPopup = document.getElementById("groupsPopup");
   createGroupButton = document.getElementById("createGroupButton");//Button to create a group
   groupsList = document.getElementById("groupsList");//List of user's groups
+  groupsListDiv = document.getElementById("groupsListDiv");//Div containing groupsList
 }
 
 //Checks to see if the user is signed in. HTML is changed based on true/false.
@@ -69,10 +71,11 @@ async function checkForSignedIn(){
       <button id="createGroupButton" type="button">Create Group</button>
       <button type="button">Join Group</button>
       <p>Select a group to view the chat.</p>
-      <P>
-        <ul id="groupsList">
-          
-        </ul>
+      <p>
+        <div id="groupsListDiv">
+          <ul id="groupsList"> 
+          </ul>
+        </div>
       <p>
     `
 
@@ -106,6 +109,8 @@ async function checkForSignedIn(){
     createGroupButton.addEventListener("click", function(createGroupButtonClickEvent){
       createGroupButtonClickEvent.preventDefault();
       createGroup();
+      delay(MILLISECONDS_IN_ONE_SECOND);
+      getAllElements();
       listGroups();
     })
 
@@ -260,17 +265,36 @@ async function saveNewMessageUser(Message){
   catch(error){
     alert('Failed to send message, with error code: ' + error.message);
   }
-} 
+}
 
 async function createGroup(){
   let name = prompt("Enter the name of your group:")
+  let doesExist = false;
   try{
-    const group = new Parse.Object("Group");
-    let currentUser = await Parse.User.currentAsync();
-    let members = [currentUser.get("username")];
-    group.set("name", name);
-    group.set("members", members);
-    let result = await group.save();
+    //Verify if name is already being used
+    const groups = new Parse.Query("Group");
+    const results = await groups.find();
+
+    for(let i = 0; i < results.length; i++){
+      const group = results[i];
+      const groupName = group.get("name");
+      if(groupName == name){
+        doesExist = true;
+      }
+    }
+
+    if(doesExist){
+      alert(`The group name, ${name}, is already in use. Please try again with another name.`);
+    }
+    else{
+      const group = new Parse.Object("Group");
+        let currentUser = await Parse.User.currentAsync();
+        let members = [currentUser.get("username")];
+        group.set("name", name);
+        group.set("members", members);
+        let result = await group.save();
+        delay(MILLISECONDS_IN_ONE_SECOND);
+    }
   }
   catch(error){
     alert('Failed to create group, with error code: ' + error.message);
@@ -279,18 +303,13 @@ async function createGroup(){
 }
 
 async function listGroups(){
+  getAllElements();
   try{
-    groupsPopup.innerHTML = 
+    groupsListDiv.innerHTML = 
     `
-      <h1>Your Groups</h1>
-      <button id="createGroupButton">Create Group</button>
-      <button>Join Group</button>
-      <p>Select a group to view the chat.</p>
-      <P>
         <ul id="groupsList">
           
         </ul>
-      <p>
     `
     
     getAllElements();
