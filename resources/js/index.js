@@ -70,8 +70,6 @@ async function checkForSignedIn(){
       <h1>Your Groups</h1>
       <button id="createGroupButton" type="button">Create Group</button>
       <button type="button">Join Group</button>
-      <button id="refreshGroupsButton" type="button">
-      </button>
       <p>Select a group to view the chat.</p>
       <p>
         <div id="groupsListDiv">
