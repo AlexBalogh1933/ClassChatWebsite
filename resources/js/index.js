@@ -13,8 +13,11 @@ let favoritesPopup;
 let groupsPopup;
 let createGroupButton;
 let groupsList;
+let groupsListDiv;
 
 window.localStorage.clear();
+
+let currentGroup = 0; // 0 = General
 
 getAllElements();
 checkForSignedIn();
@@ -40,6 +43,7 @@ async function getAllElements(){
   groupsPopup = document.getElementById("groupsPopup");
   createGroupButton = document.getElementById("createGroupButton");//Button to create a group
   groupsList = document.getElementById("groupsList");//List of user's groups
+  groupsListDiv = document.getElementById("groupsListDiv");//Div containing groupsList
 }
 
 //Checks to see if the user is signed in. HTML is changed based on true/false.
@@ -64,17 +68,20 @@ async function checkForSignedIn(){
     groupsPopup.innerHTML = 
     `
       <h1>Your Groups</h1>
-      <button id="createGroupButton">Create Group</button>
-      <button>Join Group</button>
+      <button id="createGroupButton" type="button">Create Group</button>
+      <button type="button">Join Group</button>
+      <button id="refreshGroupsButton" type="button">
+      </button>
       <p>Select a group to view the chat.</p>
-      <P>
-        <ul id="groupsList">
-          
-        </ul>
+      <p>
+        <div id="groupsListDiv">
+          <ul id="groupsList"> 
+          </ul>
+        </div>
       <p>
     `
 
-    getGroups();
+    listGroups();
     getAllElements();
 
     //Adds logout button logic
@@ -104,7 +111,9 @@ async function checkForSignedIn(){
     createGroupButton.addEventListener("click", function(createGroupButtonClickEvent){
       createGroupButtonClickEvent.preventDefault();
       createGroup();
-      getGroups();
+      delay(MILLISECONDS_IN_ONE_SECOND);
+      getAllElements();
+      listGroups();
     })
 
 
@@ -127,14 +136,14 @@ async function checkForSignedIn(){
 
     favoritesPopup.innerHTML =
     `
-      <p>Your Favorites</p>
+      <h1>Your Favorites</h1>
       <p>Please sign in to view your favorites.</p>
       <a href="#" class="popup-box-close">X</a>
     `;
 
     groupsPopup.innerHTML = 
     `
-      <p>Your Groups</p>
+      <h1>Your Groups</h1>
       <p>Please sign in to view your groups.</p>
       <a href="#" class="popup-box-close">X</a>
     `;
@@ -258,17 +267,36 @@ async function saveNewMessageUser(Message){
   catch(error){
     alert('Failed to send message, with error code: ' + error.message);
   }
-} 
+}
 
 async function createGroup(){
   let name = prompt("Enter the name of your group:")
+  let doesExist = false;
   try{
-    const group = new Parse.Object("Group");
-    let currentUser = await Parse.User.currentAsync();
-    let members = [currentUser.get("username")];
-    group.set("name", name);
-    group.set("members", members);
-    let result = await group.save();
+    //Verify if name is already being used
+    const groups = new Parse.Query("Group");
+    const results = await groups.find();
+
+    for(let i = 0; i < results.length; i++){
+      const group = results[i];
+      const groupName = group.get("name");
+      if(groupName == name){
+        doesExist = true;
+      }
+    }
+
+    if(doesExist){
+      alert(`The group name, ${name}, is already in use. Please try again with another name.`);
+    }
+    else{
+      const group = new Parse.Object("Group");
+        let currentUser = await Parse.User.currentAsync();
+        let members = [currentUser.get("username")];
+        group.set("name", name);
+        group.set("members", members);
+        let result = await group.save();
+        delay(MILLISECONDS_IN_ONE_SECOND);
+    }
   }
   catch(error){
     alert('Failed to create group, with error code: ' + error.message);
@@ -276,19 +304,14 @@ async function createGroup(){
       
 }
 
-async function getGroups(){
+async function listGroups(){
+  getAllElements();
   try{
-    groupsPopup.innerHTML = 
+    groupsListDiv.innerHTML = 
     `
-      <h1>Your Groups</h1>
-      <button id="createGroupButton">Create Group</button>
-      <button>Join Group</button>
-      <p>Select a group to view the chat.</p>
-      <P>
         <ul id="groupsList">
           
         </ul>
-      <p>
     `
     
     getAllElements();
@@ -296,11 +319,22 @@ async function getGroups(){
     groups.ascending("name");
     const results = await groups.find();
 
+    //List general
+    let liGeneral = document.createElement("li");
+    liGeneral.innerText = "General";
+    groupsList.appendChild(liGeneral);
+
+    //List other groups
     for (let i = 0; i < results.length; i++){
       const group = results[i];
-      let li = document.createElement("li");
-      li.innerText = group.get("name");
-      groupsList.appendChild(li);
+      const groupMembers = group.get("members");
+      const currentUser = await Parse.User.currentAsync();
+      const currentUsername = currentUser.get('username');
+      if(groupMembers.includes(currentUsername)){
+        let li = document.createElement("li");
+        li.innerText = group.get("name");
+        groupsList.appendChild(li);
+      }
     }
   }
   catch(error){

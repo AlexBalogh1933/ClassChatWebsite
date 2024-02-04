@@ -231,7 +231,7 @@ textarea.chatDisplay {
     resize: none;
 }
 
- /* Other Chats */ 
+ /* Sidebar */ 
 .chatSelection {
     border: 3px solid white;
     width: 16%;
@@ -257,9 +257,37 @@ button.sidebarButtons {
     font-size: 14px;
     display: inline-block;
 }
-/* The groups/favorites popup*/
 .sidebarModal {
+    padding-left: 4px;
+    padding-right: 4px;
     
+}
+.sidebarModal h1 {
+    color: #000000;
+}
+.sidebarModal button {
+    width: 20%;
+    background-color: #FF4E50;
+    color: black;
+    padding: 4px 6px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+}
+#sidebarTools {
+    padding-top: 4px;
+}
+
+/* The groups/favorites popup*/
+.popupModal {
+    padding: 0px 4px 4px 4px;
     color: #000000;
     top: 0;
     bottom: 0;
@@ -267,15 +295,37 @@ button.sidebarButtons {
     right: 0;
     background: #FFF;
     transition: all 0.4s;
-    visibility: hidden;
+    display: none;
     opacity: 0;
+    border-radius: 4px;
+    text-align: center;
 }
-
-.sidebarModal:target {
-    visibility: visible;
+.popupModal:target {
+    display: block;
     opacity: 1;
 }
+.popupModal ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+.popupModal li {
+    list-style-type: none;
+    padding: 5px;
+    margin-bottom: 3px;
 
+    background-color: #FF4E50;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: bold;
+    font-size: 14px;
+}
 .popup-box-close {
     position: absolute;
     top: 0;

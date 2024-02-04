@@ -34,16 +34,30 @@
             
             <!-- Chat Side Selection Tab -->
             <div class="chatSelection">
-                <a href="#favoritesPopup">
-                    <button id="favoritesButton" class="sidebarButtons" type="button">Favorites</button>
-                </a>
-                <div id="favoritesPopup" class="sidebarModal">
-                </div>
 
-                <a href="#groupsPopup">
-                    <button id="groupsButton" class="sidebarButtons" type="button">Groups</button>
-                </a>
-                <div id="groupsPopup" class="sidebarModal">
+                <div id="sidebarTools" class="sidebarModal">
+
+                    <a href="#favoritesPopup">
+                        <button id="favoritesButton" class="sidebarButtons" type="button">Favorites</button>
+                    </a>
+    
+                    <a href="#groupsPopup">
+                        <button id="groupsButton" class="sidebarButtons" type="button">Groups</button>
+                    </a>
+
+                    <input type="text" placeholder="Search Groups and Users..."></input>
+
+                </div>
+                
+
+                <div id="sidebarPopups" class="sidebarModal">
+
+                    <div id="favoritesPopup" class="popupModal">
+                    </div>
+    
+                    <div id="groupsPopup" class="popupModal">
+                    </div>
+
                 </div>
                 
             </div>
