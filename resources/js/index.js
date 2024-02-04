@@ -14,6 +14,7 @@ let groupsPopup;
 let createGroupButton;
 let groupsList;
 let groupsListDiv;
+let currentChatName;
 
 window.localStorage.clear();
 
@@ -44,6 +45,7 @@ async function getAllElements(){
   createGroupButton = document.getElementById("createGroupButton");//Button to create a group
   groupsList = document.getElementById("groupsList");//List of user's groups
   groupsListDiv = document.getElementById("groupsListDiv");//Div containing groupsList
+  currentChatName = document.getElementById("currentChatName");
 }
 
 //Checks to see if the user is signed in. HTML is changed based on true/false.
@@ -322,17 +324,29 @@ async function listGroups(){
     //List general
     let liGeneral = document.createElement("li");
     liGeneral.innerText = "General";
+    liGeneral.addEventListener("click", function(selectGeneralClickEvent){
+      selectGeneralClickEvent.preventDefault();
+      selectGroup("0", "General");
+    })
     groupsList.appendChild(liGeneral);
 
     //List other groups
     for (let i = 0; i < results.length; i++){
       const group = results[i];
       const groupMembers = group.get("members");
+      const groupId = group.id;
+      const groupName = group.get("name");
       const currentUser = await Parse.User.currentAsync();
       const currentUsername = currentUser.get('username');
       if(groupMembers.includes(currentUsername)){
         let li = document.createElement("li");
-        li.innerText = group.get("name");
+        li.innerText = groupName;
+
+        //add selection logic to li items
+        li.addEventListener("click", function(selectGroupClickEvent){
+          selectGroupClickEvent.preventDefault();
+          selectGroup(groupId, groupName);
+        })
         groupsList.appendChild(li);
       }
     }
@@ -340,6 +354,12 @@ async function listGroups(){
   catch(error){
     alert(`Failed to get groups with error code: ${error.message}`)
   }
+}
+
+async function selectGroup(GroupId, GroupName){
+  currentGroup = GroupId;
+  currentGroupName = GroupName;
+  currentChatName.innerHTML = `${currentGroupName} - ${currentGroup}`;
 }
 
 function delay(milliseconds){
