@@ -16,6 +16,8 @@ let groupsList;
 
 window.localStorage.clear();
 
+let currentGroup = 0; // 0 = General
+
 getAllElements();
 checkForSignedIn();
 
@@ -74,7 +76,7 @@ async function checkForSignedIn(){
       <p>
     `
 
-    getGroups();
+    listGroups();
     getAllElements();
 
     //Adds logout button logic
@@ -104,7 +106,7 @@ async function checkForSignedIn(){
     createGroupButton.addEventListener("click", function(createGroupButtonClickEvent){
       createGroupButtonClickEvent.preventDefault();
       createGroup();
-      getGroups();
+      listGroups();
     })
 
 
@@ -276,7 +278,7 @@ async function createGroup(){
       
 }
 
-async function getGroups(){
+async function listGroups(){
   try{
     groupsPopup.innerHTML = 
     `
@@ -296,11 +298,22 @@ async function getGroups(){
     groups.ascending("name");
     const results = await groups.find();
 
+    //List general
+    let liGeneral = document.createElement("li");
+    liGeneral.innerText = "General";
+    groupsList.appendChild(liGeneral);
+
+    //List other groups
     for (let i = 0; i < results.length; i++){
       const group = results[i];
-      let li = document.createElement("li");
-      li.innerText = group.get("name");
-      groupsList.appendChild(li);
+      const groupMembers = group.get("members");
+      const currentUser = await Parse.User.currentAsync();
+      const currentUsername = currentUser.get('username');
+      if(groupMembers.includes(currentUsername)){
+        let li = document.createElement("li");
+        li.innerText = group.get("name");
+        groupsList.appendChild(li);
+      }
     }
   }
   catch(error){
