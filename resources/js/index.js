@@ -245,6 +245,7 @@ async function saveNewMessageAnon(Message){
       const message = new Parse.Object("Message");
       message.set("sender", "A Classmate");
       message.set("contents", Message);
+      message.set("groupID", currentGroup);
       let result = await message.save();
     }
     catch(error){
@@ -260,6 +261,7 @@ async function saveNewMessageUser(Message){
     let currentUsername = currentUser.get('username');
     message.set("sender", currentUsername);
     message.set("contents", Message);
+    message.set("groupID", currentGroup);
     let result = await message.save(); 
   }
   catch(error){
