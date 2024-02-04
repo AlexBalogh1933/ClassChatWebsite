@@ -278,7 +278,7 @@ async function createGroup(){
     for(let i = 0; i < results.length; i++){
       const group = results[i];
       const groupName = group.get("name");
-      if(groupName == name){
+      if(groupName.toLowerCase() == name.toLowerCase() || name.toLowerCase() == "general"){
         doesExist = true;
       }
     }
