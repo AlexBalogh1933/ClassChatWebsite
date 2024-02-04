@@ -14,6 +14,7 @@ let groupsPopup;
 let createGroupButton;
 let groupsList;
 let groupsListDiv;
+let currentChatName;
 
 window.localStorage.clear();
 
@@ -44,6 +45,7 @@ async function getAllElements(){
   createGroupButton = document.getElementById("createGroupButton");//Button to create a group
   groupsList = document.getElementById("groupsList");//List of user's groups
   groupsListDiv = document.getElementById("groupsListDiv");//Div containing groupsList
+  currentChatName = document.getElementById("currentChatName");
 }
 
 //Checks to see if the user is signed in. HTML is changed based on true/false.
@@ -70,8 +72,6 @@ async function checkForSignedIn(){
       <h1>Your Groups</h1>
       <button id="createGroupButton" type="button">Create Group</button>
       <button type="button">Join Group</button>
-      <button id="refreshGroupsButton" type="button">
-      </button>
       <p>Select a group to view the chat.</p>
       <p>
         <div id="groupsListDiv">
@@ -247,6 +247,7 @@ async function saveNewMessageAnon(Message){
       const message = new Parse.Object("Message");
       message.set("sender", "A Classmate");
       message.set("contents", Message);
+      message.set("groupID", currentGroup);
       let result = await message.save();
     }
     catch(error){
@@ -262,6 +263,7 @@ async function saveNewMessageUser(Message){
     let currentUsername = currentUser.get('username');
     message.set("sender", currentUsername);
     message.set("contents", Message);
+    message.set("groupID", currentGroup);
     let result = await message.save(); 
   }
   catch(error){
@@ -280,7 +282,7 @@ async function createGroup(){
     for(let i = 0; i < results.length; i++){
       const group = results[i];
       const groupName = group.get("name");
-      if(groupName == name){
+      if(groupName.toLowerCase() == name.toLowerCase() || name.toLowerCase() == "general"){
         doesExist = true;
       }
     }
@@ -322,17 +324,29 @@ async function listGroups(){
     //List general
     let liGeneral = document.createElement("li");
     liGeneral.innerText = "General";
+    liGeneral.addEventListener("click", function(selectGeneralClickEvent){
+      selectGeneralClickEvent.preventDefault();
+      selectGroup("0", "General");
+    })
     groupsList.appendChild(liGeneral);
 
     //List other groups
     for (let i = 0; i < results.length; i++){
       const group = results[i];
       const groupMembers = group.get("members");
+      const groupId = group.id;
+      const groupName = group.get("name");
       const currentUser = await Parse.User.currentAsync();
       const currentUsername = currentUser.get('username');
       if(groupMembers.includes(currentUsername)){
         let li = document.createElement("li");
-        li.innerText = group.get("name");
+        li.innerText = groupName;
+
+        //add selection logic to li items
+        li.addEventListener("click", function(selectGroupClickEvent){
+          selectGroupClickEvent.preventDefault();
+          selectGroup(groupId, groupName);
+        })
         groupsList.appendChild(li);
       }
     }
@@ -340,6 +354,12 @@ async function listGroups(){
   catch(error){
     alert(`Failed to get groups with error code: ${error.message}`)
   }
+}
+
+async function selectGroup(GroupId, GroupName){
+  currentGroup = GroupId;
+  currentGroupName = GroupName;
+  currentChatName.innerHTML = `${currentGroupName} - ${currentGroup}`;
 }
 
 function delay(milliseconds){
