@@ -18,8 +18,11 @@
     </head>
     <body>
         <header>
-            <li class="account"><a href="resources/html/account.html">Account</a></li>
-        </header>1
+            <div id="accountPage" class="accountPage">
+                <!--See index.js/checkForSignedIn() for context-->
+            </div>
+            <!--<li class="account"><a href="resources/html/account.html">Account</a></li>-->
+        </header>
         <main class="home">
             <h1>ClassChat</h1>
 
@@ -38,11 +41,11 @@
                 <div id="sidebarTools" class="sidebarModal">
 
                     <a href="#favoritesPopup">
-                        <button id="favoritesButton" class="sidebarButtons" type="button">Favorites</button>
+                        <button id="favoritesButton" class="favoritesButton" type="button">Favorites</button>
                     </a>
     
                     <a href="#groupsPopup">
-                        <button id="groupsButton" class="sidebarButtons" type="button">Groups</button>
+                        <button id="groupsButton" class="groupsButton" type="button">Groups</button>
                     </a>
 
                     <input type="text" placeholder="Search Groups and Users..."></input>
@@ -70,7 +73,7 @@
                 </textarea>
                 <div id="chatbar" class="chatbar">
                     <!--See index.js/checkForSignedIn() for context-->
-                 </div>
+                </div>
             </div>
         </main>
         <script src="resources/js/index.js"></script>

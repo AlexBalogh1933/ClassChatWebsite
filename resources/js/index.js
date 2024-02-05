@@ -15,6 +15,7 @@ let createGroupButton;
 let groupsList;
 let groupsListDiv;
 let currentChatName;
+let accountPage;
 
 window.localStorage.clear();
 
@@ -23,7 +24,7 @@ let currentGroup = 0; // 0 = General
 getAllElements();
 checkForSignedIn();
 
-//Set the interval at which the updateMessages() function is run.
+//Set the interval at which the updatesidebarButtonsMessages() function is run.
 const MILLISECONDS_IN_ONE_SECOND = 1000;
 setInterval(updateMessages, MILLISECONDS_IN_ONE_SECOND);
 
@@ -46,6 +47,7 @@ async function getAllElements(){
   groupsList = document.getElementById("groupsList");//List of user's groups
   groupsListDiv = document.getElementById("groupsListDiv");//Div containing groupsList
   currentChatName = document.getElementById("currentChatName");
+  accountPage = document.getElementById("accountPage");//Account Page Button
 }
 
 //Checks to see if the user is signed in. HTML is changed based on true/false.
@@ -54,6 +56,11 @@ async function checkForSignedIn(){
   let currentUser = await Parse.User.currentAsync();
   //if a user is signed in
   if(currentUser != null){
+    accountPage.innerHTML =
+    `
+    <li class="account"><a href="resources/html/account.html">Account</a></li>
+    `;
+
     accountInformation.innerHTML = 
     `
     <p class="signInWelcome">Welcome, ${currentUser.get('username')}</p>
@@ -62,7 +69,7 @@ async function checkForSignedIn(){
 
     chatbar.innerHTML = 
     `
-      <input id ="typeMessage" class="typeMessage" type="text" placeholder="Type a message ...">
+      <input id ="typeMessage" class="typeMessageUser" type="text" placeholder="Type a message ...">
       <button id="sendButtonAnon" class="sendMessageAnonBTN" type="button">Send as: A Classmate</button>
       <button id="sendButtonAsUser" class="sendMessageUserBTN" type="button">Send as: ${currentUser.get('username')}</button>
     `;
@@ -120,6 +127,10 @@ async function checkForSignedIn(){
   }   
   //if a user is not signed in
   else{
+    accountPage.innerHTML =
+    `
+    
+    `;//clears accountPage section
     accountInformation.innerHTML = 
     `
       <input id="usernameInput" class="usernameInput" type="text" placeholder="Username"></input>
@@ -130,7 +141,7 @@ async function checkForSignedIn(){
 
     chatbar.innerHTML = 
     `
-      <input id ="typeMessage" class="typeMessage" type="text" placeholder="Type a message ...">
+      <input id ="typeMessage" class="typeMessageAnon" type="text" placeholder="Type a message ...">
       <button id="sendButtonAnon" class="sendMessageAnonBTN" type="button">Send as: A Classmate</button>
     `;
 

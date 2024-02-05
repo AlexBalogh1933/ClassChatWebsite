@@ -40,12 +40,12 @@ nav ul li a {
     text-decoration: none;
     color: black;
 }
-
 li.account {
     display: block;
+    margin-right: 5px;
     padding: 8px 16px;
     position: absolute;
-    left: 80%;
+    left: 85%;
 }
 li.account a{
     text-align: center;
@@ -56,15 +56,16 @@ li.account a{
     padding-right: 1em;
     padding-top: .05em;
     padding-bottom: .05em;
-    border: solid 1px #9BCDD2;
+    border: solid 1px #FF4E50;
     display: inline-block;
+    border-radius: 4px;
 }
 li.account a:link, a:visited{
-    background-color: #9BCDD2;
+    background-color: #FF4E50;
     color: black;
 }
 li.account a:hover {
-    background-color: #FF8551;
+    background-color: #FF7C7d;
     color: black;
 }
 
@@ -105,7 +106,7 @@ td {
     margin: 10px;
 }
 
-/* Form CSS */
+/* Account Form CSS */
 input[type=text], select {
     width: 100%;
     padding: 8px 10px;
@@ -160,10 +161,10 @@ input[type=reset] {
     display: inline-block;
 }
 input[type=submit]:hover {
-    background-color: #FF8183;
+    background-color: #FF7C7d;
 }
 input[type=reset]:hover {
-    background-color: #FF8183;
+    background-color: #FF7C7d;
 }
 
 /* Open Chat */
@@ -183,8 +184,16 @@ p.currentChatName {
     color: #FAF0E4;
 
 }
-input.typeMessage {
+input.typeMessageUser {
     width: 74%;
+    font-size: 1.1em;
+    padding: 8px 10px;
+    position: absolute;
+    left: 2%;
+    bottom: 2%;
+}
+input.typeMessageAnon {
+    width: 85%;
     font-size: 1.1em;
     padding: 8px 10px;
     position: absolute;
@@ -206,6 +215,9 @@ button.sendMessageAnonBTN {
     right: 2%;
     bottom: 2%;
 }
+button.sendMessageAnonBTN:hover {
+    background-color: #FF7C7d;
+}
 button.sendMessageUserBTN {
     width: 10%;
     background-color: #FF4E50;
@@ -219,7 +231,10 @@ button.sendMessageUserBTN {
     display: inline-block;
     position: absolute;
     right: 13%;
-    bottom: 3%;
+    bottom: 2%;
+}
+button.sendMessageUserBTN:hover {
+    background-color: #FF7C7d;
 }
 textarea.chatDisplay {
     position: absolute;
@@ -241,8 +256,8 @@ textarea.chatDisplay {
     left: 2%;
     text-align: center;
 }
-button.sidebarButtons {
-    width: 20%;
+button.favoritesButton {
+    width: 26%;
     background-color: #FF4E50;
     color: black;
     padding: 4px 6px;
@@ -256,6 +271,28 @@ button.sidebarButtons {
     font-weight: bold;
     font-size: 14px;
     display: inline-block;
+}
+button.groupsButton {
+    width: 22%;
+    background-color: #FF4E50;
+    color: black;
+    padding: 4px 6px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+}
+button.favoritesButton:hover {
+    background-color: #FF7C7d;
+}
+button.groupsButton:hover {
+    background-color: #FF7C7d;
 }
 .sidebarModal {
     padding-left: 4px;
@@ -265,7 +302,7 @@ button.sidebarButtons {
 .sidebarModal h1 {
     color: #000000;
 }
-.sidebarModal button {
+/*.sidebarModal button{
     width: 20%;
     background-color: #FF4E50;
     color: black;
@@ -281,6 +318,9 @@ button.sidebarButtons {
     font-size: 14px;
     display: inline-block;
 }
+.sidebarModal button:hover {
+    background-color: #FF7C7d;
+}*/
 #sidebarTools {
     padding-top: 4px;
 }
@@ -313,7 +353,6 @@ button.sidebarButtons {
     list-style-type: none;
     padding: 5px;
     margin-bottom: 3px;
-
     background-color: #FF4E50;
     color: black;
     border: none;
@@ -326,11 +365,11 @@ button.sidebarButtons {
     font-weight: bold;
     font-size: 14px;
 }
-.popup-box-close {
+a.popup-box-close {
     position: absolute;
-    top: 0;
+    top: 0%;
     right: 15px;
-    color: #fe0606;
+    color: #FF4E50;
     text-decoration: none;
     font-size: 30px;
 }
@@ -389,6 +428,9 @@ button.signInButton {
     left: 3%;
     bottom: 6%;
 }
+button.signInButton:hover {
+    background-color: #FF7C7d;
+}
 button.signUpButton {
     width: 20%;
     background-color: #FF4E50;
@@ -404,6 +446,9 @@ button.signUpButton {
     left: 25%;
     bottom: 6%;
 }
+button.signUpButton:hover {
+    background-color: #FF7C7d;
+}
 button.logOutBTN {
     width: 30%;
     background-color: #FF4E50;
@@ -418,5 +463,8 @@ button.logOutBTN {
     position: absolute;
     left: 3%;
     bottom: 6%;
+}
+button.logOutBTN:hover {
+    background-color: #FF7C7d;
 }
 
