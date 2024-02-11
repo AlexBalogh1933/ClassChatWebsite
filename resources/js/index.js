@@ -18,7 +18,7 @@ let currentChatName;
 
 window.localStorage.clear();
 
-let currentGroup = 0; // 0 = General
+let currentGroup = "0"; // 0 = General
 
 getAllElements();
 checkForSignedIn();
@@ -184,8 +184,10 @@ async function updateMessages(){
 
     for (let i = 0; i < results.length; i++){
       const object = results[i];
-      const messageString = object.get("sender") + ": (" + object.get("createdAt")  + ") " + object.get("contents") + "\n";
-      messagesString += messageString;
+      if(object.get("groupID") == currentGroup){
+        const messageString = object.get("sender") + ": (" + object.get("createdAt")  + ") " + object.get("contents") + "\n";
+        messagesString += messageString;
+      }
     }
 
     chatDisplay.value = messagesString;
@@ -359,7 +361,7 @@ async function listGroups(){
 async function selectGroup(GroupId, GroupName){
   currentGroup = GroupId;
   currentGroupName = GroupName;
-  currentChatName.innerHTML = `${currentGroupName} - ${currentGroup}`;
+  currentChatName.innerHTML = `${currentGroupName}`;
 }
 
 function delay(milliseconds){
