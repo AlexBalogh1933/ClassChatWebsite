@@ -176,6 +176,14 @@ input[type=reset]:hover {
     bottom: 3%;
     right: 2%;
 }
+textarea.chatDisplay {
+    position: absolute;
+    right: 2%;
+    top: 8%;
+    width: 95.5%;
+    height: 80%;
+    resize: none;
+}
 p.currentChatName {
     margin: .5%;
     font-size: 2em;
@@ -186,17 +194,15 @@ p.currentChatName {
 }
 input.typeMessageUser {
     width: 74%;
-    font-size: 1.1em;
-    padding: 8px 10px;
     position: absolute;
+    font-family: "Times New Roman", serif;
     left: 2%;
     bottom: 2%;
 }
 input.typeMessageAnon {
     width: 85%;
-    font-size: 1.1em;
-    padding: 8px 10px;
     position: absolute;
+    font-family: "Times New Roman", serif;
     left: 2%;
     bottom: 2%;
 }
@@ -204,12 +210,11 @@ button.sendMessageAnonBTN {
     width: 10%;
     background-color: #FF4E50;
     color: black;
-    padding: 8px 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: "Times New Roman", serif;
     font-weight: bold;
-    font-size: 17px;
     display: inline-block;
     position: absolute;
     right: 2%;
@@ -222,12 +227,11 @@ button.sendMessageUserBTN {
     width: 10%;
     background-color: #FF4E50;
     color: black;
-    padding: 8px 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: "Times New Roman", serif;
     font-weight: bold;
-    font-size: 17px;
     display: inline-block;
     position: absolute;
     right: 13%;
@@ -235,15 +239,6 @@ button.sendMessageUserBTN {
 }
 button.sendMessageUserBTN:hover {
     background-color: #FF7C7d;
-}
-textarea.chatDisplay {
-    position: absolute;
-    right: 2%;
-    top: 8%;
-    border: 2xp solid;
-    width: 95.5%;
-    height: 80%;
-    resize: none;
 }
 
  /* Sidebar */ 
@@ -257,10 +252,8 @@ textarea.chatDisplay {
     text-align: center;
 }
 button.favoritesButton {
-    width: 26%;
     background-color: #FF4E50;
     color: black;
-    padding: 4px 6px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -268,45 +261,16 @@ button.favoritesButton {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-family: "Times New Roman", serif;
     font-weight: bold;
-    font-size: 14px;
-    display: inline-block;
-}
-button.groupsButton {
-    width: 22%;
-    background-color: #FF4E50;
-    color: black;
-    padding: 4px 6px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-weight: bold;
-    font-size: 14px;
     display: inline-block;
 }
 button.favoritesButton:hover {
     background-color: #FF7C7d;
 }
-button.groupsButton:hover {
-    background-color: #FF7C7d;
-}
-.sidebarModal {
-    padding-left: 4px;
-    padding-right: 4px;
-    
-}
-.sidebarModal h1 {
-    color: #000000;
-}
-/*.sidebarModal button{
-    width: 20%;
+button.groupsButton {
     background-color: #FF4E50;
     color: black;
-    padding: 4px 6px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -314,13 +278,23 @@ button.groupsButton:hover {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-family: "Times New Roman", serif;
     font-weight: bold;
-    font-size: 14px;
     display: inline-block;
 }
-.sidebarModal button:hover {
+button.groupsButton:hover {
     background-color: #FF7C7d;
-}*/
+}
+input.searchInput {
+    font-family: "Times New Roman", serif;
+}
+.sidebarModal {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.sidebarModal h1 {
+    color: #000000;
+}
 #sidebarTools {
     padding-top: 4px;
 }
@@ -378,93 +352,219 @@ a.popup-box-close {
 .accountInformation {
     border: 3px solid white;
     width: 16%;
-    height: 12%;
+    height: 14%;
     position: absolute;
     top: 2%;
     left: 2%;
     text-align: start;
     padding: 10px;
 }
+input.usernameInput {
+    font-family: "Times New Roman", serif;
+    position: absolute;
+}
+input.passwordInput {
+    font-family: "Times New Roman", serif;
+    position: absolute;
+}
 p.accInfo {
     font-family: "Times New Roman", serif;
     font-size: 1em;
-    padding-top: .05px;
-    padding-bottom: .05px;
     color: #FAF0E4;
 }
 .signInWelcome {
     font-family: "Times New Roman", serif;
-    font-size: 1.5em;
-    padding-top: .05px;
-    padding-bottom: .05px;
     color: #FAF0E4;
 }
-input.usernameInput {
-    width: 94%;
-    font-size: 1.1em;
-    padding: 8px 10px;
-    position: absolute;
-    top: 2%;
-}
-input.passwordInput {
-    width: 94%;
-    font-size: 1.1em;
-    padding: 8px 10px;
-    position: absolute;
-    bottom: 28%;
-}
 button.signInButton {
-    width: 20%;
     background-color: #FF4E50;
     color: black;
-    padding: 4px 6px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: "Times New Roman", serif;
     font-weight: bold;
-    font-size: 14px;
     display: inline-block;
     position: absolute;
-    left: 3%;
-    bottom: 6%;
 }
 button.signInButton:hover {
     background-color: #FF7C7d;
 }
 button.signUpButton {
-    width: 20%;
     background-color: #FF4E50;
     color: black;
-    padding: 4px 6px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: "Times New Roman", serif;
     font-weight: bold;
-    font-size: 14px;
     display: inline-block;
     position: absolute;
-    left: 25%;
-    bottom: 6%;
 }
 button.signUpButton:hover {
     background-color: #FF7C7d;
 }
 button.logOutBTN {
-    width: 30%;
     background-color: #FF4E50;
     color: black;
-    padding: 4px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: "Times New Roman", serif;
     font-weight: bold;
-    font-size: 14px;
     display: inline-block;
     position: absolute;
-    left: 3%;
-    bottom: 6%;
 }
 button.logOutBTN:hover {
     background-color: #FF7C7d;
 }
 
+/* Big Screen: 1980px */
+@media only screen and (min-width: 1900px) 
+{
+    /* Open Chat */
+    textarea.chatDisplay {
+        font-size: 14px;
+    }
+    button.sendMessageAnonBTN {
+        font-size: 18px;
+        padding: 6px 8px;
+    }
+    button.sendMessageUserBTN {
+        font-size: 18px;
+        padding: 6px 8px;
+    }
+    input.typeMessageUser {
+        font-size: 18px;
+        padding: 8px 10px;
+    }
+    input.typeMessageAnon {
+        font-size: 18px;
+        padding: 8px 10px;
+    }
+    /* Sidebar */ 
+    button.favoritesButton {
+        width: 90px;
+        font-size: 18px;
+        padding: 4px 8px;
+    }
+    button.groupsButton {
+        width: 80px;
+        font-size: 18px;
+        padding: 4px 8px;
+    }
+    input.searchInput {
+        font-size: 18px;
+        padding: 8px 10px;
+    }
+    /* Acount Information */
+    input.usernameInput {
+        width: 94%;
+        font-size: 18px;
+        padding: 8px 10px;
+        top: 8px;
+    }
+    input.passwordInput {
+        width: 94%;
+        font-size: 18px;
+        padding: 8px 10px;
+        bottom: 50px;
+    }
+    button.signInButton {
+        width: 90px;
+        padding: 6px 8px;
+        font-size: 18px;
+        bottom: 12px;
+    }
+    button.signUpButton {
+        width: 90px;
+        padding: 6px 8px;
+        font-size: 18px;
+        left: 110px;
+        bottom: 12px;
+    }
+    .signInWelcome {
+        font-size: 26px;
+    }
+    button.logOutBTN {
+        width: 120px;
+        padding: 4px 6px;
+        font-size: 18px;
+        bottom: 6px;
+    }
+}
+
+/* Laptop Size: under 1700px */
+@media only screen and (max-width: 1700px) 
+{
+    /* Open Chat */
+    textarea.chatDisplay {
+        font-size: 12px;
+    }
+    button.sendMessageAnonBTN {
+        font-size: 14px;
+        padding: 6px 6px;
+    }
+    button.sendMessageUserBTN {
+        font-size: 14px;
+        padding: 6px 6px;
+    }
+    input.typeMessageUser {
+        font-size: 16px;
+        padding: 6px 8px;
+    }
+    input.typeMessageAnon {
+        font-size: 16px;
+        padding: 6px 8px;
+    }
+    /* Sidebar */ 
+    button.favoritesButton {
+        width: 70px;
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+    button.groupsButton {
+        width: 60px;
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+    input.searchInput {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+    /* Acount Information */
+    input.usernameInput {
+        width: 92%;
+        font-size: 14px;
+        padding: 8px 10px;
+        top: 2%;
+    }
+    input.passwordInput {
+        width: 92%;
+        font-size: 14px;
+        padding: 8px 10px;
+        bottom: 28%;
+    }
+    button.signInButton {
+        width: 60px;
+        padding: 4px 6px;
+        font-size: 14px;
+        bottom: 6px;
+    }
+    button.signUpButton {
+        width: 60px;
+        padding: 4px 6px;
+        font-size: 14px;
+        left: 76px;
+        bottom: 6px;
+    }
+    .signInWelcome {
+        font-size: 20px;
+    }
+    button.logOutBTN {
+        width: 100px;
+        padding: 4px 6px;
+        font-size: 14px;
+        bottom: 6px;
+    }
+}
