@@ -257,11 +257,16 @@ async function logOut(){
 //Sends a message anonymously as "A Classmate"
 async function saveNewMessageAnon(Message){
     try{
-      const message = new Parse.Object("Message");
-      message.set("sender", "A Classmate");
-      message.set("contents", Message);
-      message.set("groupID", currentGroup);
-      let result = await message.save();
+      if(!checkProfanity(Message)){
+        const message = new Parse.Object("Message");
+        message.set("sender", "A Classmate");
+        message.set("contents", Message);
+        message.set("groupID", currentGroup);
+        let result = await message.save();
+      }
+      else{
+        alert('PROFANE FOOL');
+      }
     }
     catch(error){
       alert('Failed to send message, with error code: ' + error.message);
@@ -271,17 +276,30 @@ async function saveNewMessageAnon(Message){
 //Sends a message NON anonymously as username
 async function saveNewMessageUser(Message){
   try{
-    const message = new Parse.Object("Message");
-    let currentUser = await Parse.User.currentAsync();
-    let currentUsername = currentUser.get('username');
-    message.set("sender", currentUsername);
-    message.set("contents", Message);
-    message.set("groupID", currentGroup);
-    let result = await message.save(); 
+    if(!checkProfanity(Message)){
+      const message = new Parse.Object("Message");
+      let currentUser = await Parse.User.currentAsync();
+      let currentUsername = currentUser.get('username');
+      message.set("sender", currentUsername);
+      message.set("contents", Message);
+      message.set("groupID", currentGroup);
+      let result = await message.save(); 
+    }
+    else{
+      alert('PROFANE FOOL');
+    }
   }
   catch(error){
     alert('Failed to send message, with error code: ' + error.message);
   }
+}
+
+//import badwords-list
+var profanity = require('@2toad/profanity').profanity;
+
+async function checkProfanity(Message){
+  let message = Message;
+  return profanity.exists(message);
 }
 
 async function createGroup(){
