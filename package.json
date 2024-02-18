@@ -1,7 +1,6 @@
 {
+  "type": "module",
   "dependencies": {
-    "@2toad/profanity": "^2.2.0",
-    "badwords-list": "^1.0.0",
     "parse": "^4.2.0"
   }
 }
