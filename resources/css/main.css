@@ -504,10 +504,12 @@ button.logOutBTN:hover {
     button.sendMessageAnonBTN {
         font-size: 14px;
         padding: 6px 6px;
+        height: 45px;
     }
     button.sendMessageUserBTN {
         font-size: 14px;
         padding: 6px 6px;
+        height: 45px;
     }
     input.typeMessageUser {
         font-size: 16px;
