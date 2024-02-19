@@ -21,6 +21,11 @@ window.localStorage.clear();
 
 let currentGroup = "0"; // 0 = General
 
+//run 'browserify index.js -o bundle.js' for every new implementation
+//https://browserify.org/
+//implement @2toad profanity package
+var profanity = require('@2toad/profanity').profanity;
+
 getAllElements();
 checkForSignedIn();
 
@@ -54,6 +59,7 @@ async function getAllElements(){
 async function checkForSignedIn(){
   //Get the current user data
   let currentUser = await Parse.User.currentAsync();
+
   //if a user is signed in
   if(currentUser != null){
     accountPage.innerHTML =
@@ -256,28 +262,40 @@ async function logOut(){
 //Send as A Classmate (ANONYMOUS)
 //Sends a message anonymously as "A Classmate"
 async function saveNewMessageAnon(Message){
-    try{
+  try{
+    //check for profanity
+    if(profanity.exists(Message)){
+      alert('The message you are trying to send contains language others may consider offensive. Please refrain from using language others may find harmful or offensive.');
+    }
+    else{
       const message = new Parse.Object("Message");
       message.set("sender", "A Classmate");
       message.set("contents", Message);
       message.set("groupID", currentGroup);
       let result = await message.save();
     }
-    catch(error){
-      alert('Failed to send message, with error code: ' + error.message);
-    }
+  }
+  catch(error){
+    alert('Failed to send message, with error code: ' + error.message);
+  }
 }
 
 //Sends a message NON anonymously as username
 async function saveNewMessageUser(Message){
   try{
-    const message = new Parse.Object("Message");
-    let currentUser = await Parse.User.currentAsync();
-    let currentUsername = currentUser.get('username');
-    message.set("sender", currentUsername);
-    message.set("contents", Message);
-    message.set("groupID", currentGroup);
-    let result = await message.save(); 
+    //check for profanity
+    if(profanity.exists(Message)){
+      alert('The message you are trying to send contains language others may consider offensive. Please refrain from using language others may find harmful or offensive.')
+    }
+    else{
+      const message = new Parse.Object("Message");
+      let currentUser = await Parse.User.currentAsync();
+      let currentUsername = currentUser.get('username');
+      message.set("sender", currentUsername);
+      message.set("contents", Message);
+      message.set("groupID", currentGroup);
+      let result = await message.save(); 
+    }
   }
   catch(error){
     alert('Failed to send message, with error code: ' + error.message);
