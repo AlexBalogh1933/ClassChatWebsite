@@ -21,7 +21,7 @@ window.localStorage.clear();
 
 let currentGroup = "0"; // 0 = General
 
-//run 'browserify index.js -o bundle.js' for every new implementation
+//run 'browserify index.js -o bundle.js' for every new implementation of the profanity package
 //https://browserify.org/
 //implement @2toad profanity package
 var profanity = require('@2toad/profanity').profanity;
