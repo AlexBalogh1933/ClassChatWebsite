@@ -636,9 +636,14 @@ let logOutButton;
 let chatbar;
 let favoritesPopup;
 let groupsPopup;
+let myGroupsButton;
 let createGroupButton;
+let joinGroupButton;
+let groupsSideDiv;
 let groupsList;
 let groupsListDiv;
+let joinGroupList;
+let joinGroupsListDiv;
 let currentChatName;
 let accountPage;
 
@@ -646,6 +651,9 @@ window.localStorage.clear();
 
 let currentGroup = "0"; // 0 = General
 
+//run 'browserify index.js -o bundle.js' for every change made to index.js. This ensures changes get moved over to bundle.js w/ browserify.
+//https://browserify.org/
+//implement @2toad profanity package
 var profanity = require('@2toad/profanity').profanity;
 
 getAllElements();
@@ -670,9 +678,14 @@ async function getAllElements(){
   chatbar = document.getElementById("chatbar");//Div containing both send message buttons and typeMessage
   favoritesPopup = document.getElementById("favoritesPopup");
   groupsPopup = document.getElementById("groupsPopup");
+  myGroupsButton = document.getElementById("myGroupsButton");//Button to see the current user's groups
   createGroupButton = document.getElementById("createGroupButton");//Button to create a group
+  joinGroupButton = document.getElementById("joinGroupButton");//Button to join a group
+  groupsSideDiv = document.getElementById("groupsSideDiv");//Div for groups sidebar content
   groupsList = document.getElementById("groupsList");//List of user's groups
   groupsListDiv = document.getElementById("groupsListDiv");//Div containing groupsList
+  joinGroupList = document.getElementById("joinGroupList");//List of joinable groups
+  joinGroupsListDiv = document.getElementById("joinGroupsListDiv");//Div containing joinGroupList
   currentChatName = document.getElementById("currentChatName");
   accountPage = document.getElementById("accountPage");//Account Page Button
 }
@@ -705,16 +718,20 @@ async function checkForSignedIn(){
     groupsPopup.innerHTML = 
     `
       <h1>Your Groups</h1>
+      <button id="myGroupsButton" type="button">My Groups</button>
       <button id="createGroupButton" type="button">Create Group</button>
-      <button type="button">Join Group</button>
-      <p>Select a group to view the chat.</p>
-      <p>
-        <div id="groupsListDiv">
-          <ul id="groupsList"> 
-          </ul>
-        </div>
-      <p>
-    `
+      <button id="joinGroupButton" type="button">Join Group</button>
+      <a href="#" class="popup-box-close">X</a>
+      <div id="groupsSideDiv">
+        <p>Select a group to view the chat.</p>
+        <p>
+          <div id="groupsListDiv">
+            <ul id="groupsList"> 
+            </ul>
+          </div>
+        </p>
+      </div>
+    `;
 
     listGroups();
     getAllElements();
@@ -742,6 +759,25 @@ async function checkForSignedIn(){
       typeMessage.value = "";
     });
 
+    //Adds My Groups logic
+    myGroupsButton.addEventListener("click", function(myGroupsButtonClickEvent){
+      myGroupsButtonClickEvent.preventDefault();
+
+      groupsSideDiv.innerHTML = 
+    `
+      <p>Select a group to view the chat.</p>
+      <p>
+        <div id="groupsListDiv">
+          <ul id="groupsList"> 
+          </ul>
+        </div>
+      </p>
+    `;
+
+    listGroups();
+    getAllElements();
+    });
+
     //Adds create group logic
     createGroupButton.addEventListener("click", function(createGroupButtonClickEvent){
       createGroupButtonClickEvent.preventDefault();
@@ -749,6 +785,24 @@ async function checkForSignedIn(){
       delay(MILLISECONDS_IN_ONE_SECOND);
       getAllElements();
       listGroups();
+    });
+
+    joinGroupButton.addEventListener("click", function(joinGroupButtonClickEvent){
+      joinGroupButtonClickEvent.preventDefault();
+
+      groupsSideDiv.innerHTML = 
+      `
+        <p>Please select a group to join it.</p>
+        <p>
+          <div id="joinGroupsListDiv">
+            <ul id="joinGroupList">
+            </ul>
+          </div>
+        </p>
+      `;
+
+      listJoinableGroups();
+      getAllElements();
     })
 
 
@@ -945,12 +999,12 @@ async function createGroup(){
     }
     else{
       const group = new Parse.Object("Group");
-        let currentUser = await Parse.User.currentAsync();
-        let members = [currentUser.get("username")];
-        group.set("name", name);
-        group.set("members", members);
-        let result = await group.save();
-        delay(MILLISECONDS_IN_ONE_SECOND);
+      let currentUser = await Parse.User.currentAsync();
+      let members = [currentUser.get("username")];
+      group.set("name", name);
+      group.set("members", members);
+      let result = await group.save();
+      delay(MILLISECONDS_IN_ONE_SECOND);
     }
   }
   catch(error){
@@ -959,6 +1013,7 @@ async function createGroup(){
       
 }
 
+//My Groups
 async function listGroups(){
   getAllElements();
   try{
@@ -967,7 +1022,7 @@ async function listGroups(){
         <ul id="groupsList">
           
         </ul>
-    `
+    `;
     
     getAllElements();
     const groups = new Parse.Query("Group");
@@ -1005,14 +1060,86 @@ async function listGroups(){
     }
   }
   catch(error){
-    alert(`Failed to get groups with error code: ${error.message}`)
+    alert(`Failed to get groups with error code: ${error.message}`);
   }
 }
 
+//Join Group
+async function listJoinableGroups(){
+  getAllElements();
+  try{
+    joinGroupsListDiv.innerHTML = 
+    `
+      <ul id="joinGroupList">
+
+      </ul>
+    `;
+    getAllElements();
+
+    //get all groups
+    const groups = new Parse.Query("Group");
+    groups.ascending("name");
+    const results = await groups.find();
+
+    //List joinable groups (groups that are not private and does not contain the current signed in user)
+    for(let i = 0; i < results.length; i++){
+      const group = results[i];
+      const groupId = group.id;
+      const groupMembers = group.get("members");
+      const groupName = group.get("name");
+      const currentUser = await Parse.User.currentAsync();
+      const currentUsername = currentUser.get('username');
+      if(!(groupMembers.includes(currentUsername))){
+        let li = document.createElement("li");
+        li.innerText = groupName;
+
+        li.addEventListener("click", function(joinGroupClickEvent){
+          joinGroupClickEvent.preventDefault();
+          joinGroup(groupId, groupName, groupMembers, currentUsername);
+        })
+        joinGroupList.append(li);
+      }
+    }
+  }
+  catch(error){
+    alert(`Failed to fetch joinable groups with error code: ${error.message}`);
+  }
+}
+
+//Chat Selection
 async function selectGroup(GroupId, GroupName){
   currentGroup = GroupId;
   currentGroupName = GroupName;
   currentChatName.innerHTML = `${currentGroupName}`;
+}
+
+//Join Group
+async function joinGroup(GroupId, GroupName, GroupMembers, CurrentUsername){
+  //get all groups
+  const groups = new Parse.Query("Group");
+  const groupToJoin = await groups.get(GroupId);
+  let members = GroupMembers;
+  members.push(CurrentUsername);
+  groupToJoin.set("members", members);
+  await groupToJoin.save();
+  alert(`You have been added to group, ${GroupName}`);
+
+  selectGroup(GroupId, GroupName);
+
+  //go back to My Groups
+  groupsSideDiv.innerHTML = 
+    `
+      <p>Select a group to view the chat.</p>
+      <p>
+        <div id="groupsListDiv">
+          <ul id="groupsList"> 
+          </ul>
+        </div>
+      </p>
+    `;
+
+    listGroups();
+    getAllElements();
 }
 
 function delay(milliseconds){
