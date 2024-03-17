@@ -85,7 +85,7 @@ async function checkForSignedIn(){
 
     chatbar.innerHTML = 
     `
-      <input id ="typeMessage" class="typeMessageUser" type="text" placeholder="Type a message ...">
+      <input id="typeMessage" class="typeMessageUser" type="text" placeholder="Type a message ...">
       <button id="sendButtonAnon" class="sendMessageAnonBTN" type="button">Send as: A Classmate</button>
       <button id="sendButtonAsUser" class="sendMessageUserBTN" type="button">Send as: ${currentUser.get('username')}</button>
     `;
@@ -93,9 +93,9 @@ async function checkForSignedIn(){
     groupsPopup.innerHTML = 
     `
       <h1>Your Groups</h1>
-      <button id="myGroupsButton" type="button">My Groups</button>
-      <button id="createGroupButton" type="button">Create Group</button>
-      <button id="joinGroupButton" type="button">Join Group</button>
+      <button id="myGroupsButton" class="myGroupsButton" type="button">My Groups</button>
+      <button id="createGroupButton" class="createGroupButton" type="button">Create Group</button>
+      <button id="joinGroupButton" class="joinGroupButton" type="button">Join Group</button>
       <a href="#" class="popup-box-close">X</a>
       <div id="groupsSideDiv">
         <p>Select a group to view the chat.</p>
@@ -204,14 +204,14 @@ async function checkForSignedIn(){
 
     favoritesPopup.innerHTML =
     `
-      <h1>Your Favorites</h1>
+      <p class="titleFG">Your Favorites</p>
       <p>Please sign in to view your favorites.</p>
       <a href="#" class="popup-box-close">X</a>
     `;
 
     groupsPopup.innerHTML = 
     `
-      <h1>Your Groups</h1>
+      <p class="titleFG">Your Groups</p>
       <p>Please sign in to view your groups.</p>
       <a href="#" class="popup-box-close">X</a>
     `;

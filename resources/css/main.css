@@ -76,7 +76,6 @@ body {
 
 /* Text CSS */
 h1 {
-    font-size: 2em;
     font-family: "Times New Roman", serif;
     text-align: center;
     color: #FAF0E4;
@@ -242,6 +241,12 @@ button.sendMessageUserBTN:hover {
 }
 
  /* Sidebar */ 
+ p.titleFG {
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+}
 .chatSelection {
     border: 3px solid white;
     width: 16%;
@@ -283,6 +288,57 @@ button.groupsButton {
     display: inline-block;
 }
 button.groupsButton:hover {
+    background-color: #FF7C7d;
+}
+button.myGroupsButton {
+    background-color: #FF4E50;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    display: inline-block;
+}
+button.myGroupsButton:hover {
+    background-color: #FF7C7d;
+}
+button.createGroupButton {
+    background-color: #FF4E50;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    display: inline-block;
+}
+button.createGroupButton:hover {
+    background-color: #FF7C7d;
+}
+button.joinGroupButton {
+    background-color: #FF4E50;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    display: inline-block;
+}
+button.joinGroupButton:hover {
     background-color: #FF7C7d;
 }
 input.searchInput {
@@ -423,6 +479,9 @@ button.logOutBTN:hover {
 @media only screen and (min-width: 1900px) 
 {
     /* Open Chat */
+    p.titleFG {
+        font-size: 25px;
+    }
     textarea.chatDisplay {
         font-size: 14px;
     }
@@ -452,6 +511,21 @@ button.logOutBTN:hover {
         width: 80px;
         font-size: 18px;
         padding: 4px 8px;
+    }
+    button.myGroupsButton {
+        width: 80px;
+        font-size: 14px;
+        padding: 4px 4px;
+    }
+    button.createGroupButton {
+        width: 100px;
+        font-size: 14px;
+        padding: 4px 4px;
+    }
+    button.joinGroupButton {
+        width: 80px;
+        font-size: 14px;
+        padding: 4px 4px;
     }
     input.searchInput {
         font-size: 18px;
@@ -497,6 +571,9 @@ button.logOutBTN:hover {
 /* Laptop Size: under 1700px */
 @media only screen and (max-width: 1700px) 
 {
+    h1 {
+        font-size: 22px;
+    }
     /* Open Chat */
     textarea.chatDisplay {
         font-size: 12px;
@@ -529,6 +606,21 @@ button.logOutBTN:hover {
         width: 60px;
         font-size: 14px;
         padding: 4px 8px;
+    }
+    button.myGroupButton {
+        width: 80px;
+        font-size: 12px;
+        padding: 4px 4px;
+    }
+    button.createGroupButton {
+        width: 80px;
+        font-size: 12px;
+        padding: 4px 4px;
+    }
+    button.joinGroupButton {
+        width: 80px;
+        font-size: 12px;
+        padding: 4px 4px;
     }
     input.searchInput {
         font-size: 14px;
