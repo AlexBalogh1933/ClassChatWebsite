@@ -638,6 +638,9 @@ let favoritesPopup;
 let groupsPopup;
 let myGroupsButton;
 let createGroupButton;
+let groupName;
+let isPrivate;
+let submitGroupButton;
 let joinGroupButton;
 let groupsSideDiv;
 let groupsList;
@@ -680,6 +683,9 @@ async function getAllElements(){
   groupsPopup = document.getElementById("groupsPopup");
   myGroupsButton = document.getElementById("myGroupsButton");//Button to see the current user's groups
   createGroupButton = document.getElementById("createGroupButton");//Button to create a group
+  groupName = document.getElementById("groupName");//Group name from the Create group form
+  isPrivate = document.getElementById("isPrivate");//Returns if this created group will be private
+  submitGroupButton = document.getElementById("submitGroupButton");//Button to submit the create group form
   joinGroupButton = document.getElementById("joinGroupButton");//Button to join a group
   groupsSideDiv = document.getElementById("groupsSideDiv");//Div for groups sidebar content
   groupsList = document.getElementById("groupsList");//List of user's groups
@@ -781,10 +787,34 @@ async function checkForSignedIn(){
     //Adds create group logic
     createGroupButton.addEventListener("click", function(createGroupButtonClickEvent){
       createGroupButtonClickEvent.preventDefault();
-      createGroup();
-      delay(MILLISECONDS_IN_ONE_SECOND);
-      getAllElements();
-      listGroups();
+
+      groupsSideDiv.innerHTML =
+      `
+        <p>Please complete all of the following fields to create a group.</p>
+        
+        <br>
+
+        <div id="groupInfo">
+          <label for="groupName">Group Name:</label>
+          <input type="text" id="groupName" name="groupName" />
+          
+          <br><br>
+
+          <label for="isPrivate">Private:</label>
+          <input type="checkbox" id="isPrivate" name="isPrivate" />
+        </div>
+
+        <br><br>
+
+        <button id="submitGroupButton" type="button">Submit</button>
+      `;
+      getAllElements;
+      try{
+        addSubmitGroupEvent;
+      }
+      catch{
+        console.log(`Unable to add event listener to submit group button.`)
+      }
     });
 
     joinGroupButton.addEventListener("click", function(joinGroupButtonClickEvent){
@@ -978,39 +1008,74 @@ async function saveNewMessageUser(Message){
   }
 }
 
+async function addSubmitGroupEvent(){
+  submitGroupButton.addEventListener("click", function(submitGroupButtonClickEvent){
+    submitGroupButtonClickEvent.preventDefault();
+    getAllElements();
+    createGroup();
+    //go back to My Groups
+    groupsSideDiv.innerHTML = 
+    `
+      <p>Select a group to view the chat.</p>
+      <p>
+        <div id="groupsListDiv">
+          <ul id="groupsList"> 
+          </ul>
+        </div>
+      </p>
+    `;
+
+    listGroups();
+    getAllElements();
+  });
+}
+
 async function createGroup(){
-  let name = prompt("Enter the name of your group:")
-  let doesExist = false;
-  try{
-    //Verify if name is already being used
-    const groups = new Parse.Query("Group");
-    const results = await groups.find();
-
-    for(let i = 0; i < results.length; i++){
-      const group = results[i];
-      const groupName = group.get("name");
-      if(groupName.toLowerCase() == name.toLowerCase() || name.toLowerCase() == "general"){
-        doesExist = true;
-      }
-    }
-
-    if(doesExist){
-      alert(`The group name, ${name}, is already in use. Please try again with another name.`);
+  //Verify a name was entered
+  if(groupName.value == "" || groupName.value == " "){
+    alert('Failed to create group, a group name was not entered.');
+  }
+  else{
+    //Check for profanity
+    if(profanity.exists(groupName.value)){
+      alert('Failed to create group, profanity was used.');
     }
     else{
-      const group = new Parse.Object("Group");
-      let currentUser = await Parse.User.currentAsync();
-      let members = [currentUser.get("username")];
-      group.set("name", name);
-      group.set("members", members);
-      let result = await group.save();
-      delay(MILLISECONDS_IN_ONE_SECOND);
+      //Verify that the desired name is not already being used.
+      let doesExist = false;
+      try{
+        const groups = new Parse.Query("Group");
+        const results = await groups.find();
+
+        for(let i = 0; i < results.length; i++){
+          const group = results[i];
+          const existingName = group.get("name");
+          if(existingName.toLowerCase() == groupName.value.toLowerCase() || groupName.value.toLowerCase() == "general"){
+            doesExist = true;
+          }
+        }
+
+        if(doesExist){
+          alert(`The group name, ${groupName.value}, is already in use. Please try again with another name.`);
+        }
+        else{
+
+          //Create the group
+          const newGroup = new Parse.Object("Group");
+          let currentUser = await Parse.User.currentAsync();
+          let members = [currentUser.get("username")];
+          group.set("name", groupName.value);
+          group.set("members", members);
+          group.set("isPrivate", isPrivate.checked);
+          let result = await group.save();
+          delay(MILLISECONDS_IN_ONE_SECOND);
+        }
+      }
+      catch(error){
+        alert('Failed to create group, with error code: ' + error.message);
+      }
     }
-  }
-  catch(error){
-    alert('Failed to create group, with error code: ' + error.message);
-  }
-      
+  }   
 }
 
 //My Groups
